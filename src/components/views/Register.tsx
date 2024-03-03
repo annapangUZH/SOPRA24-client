@@ -74,10 +74,10 @@ const Register = () => {
             onChange={(n) => setName(n)}
           />
           <FormField
-              label="Password"
-              value={password}
-              onChange={(p) => setPassword(p)}
-            />
+            label="Password"
+            value={password}
+            onChange={(p) => setPassword(p)}
+          />
           <div className="login button-container">
             <Button
               disabled={!username || !name}
