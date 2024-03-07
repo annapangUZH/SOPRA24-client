@@ -40,7 +40,7 @@ const Game = () => {
       navigate("/login");
     } catch (error) {
       alert(
-          `Something went wrong during the logout: \n${handleError(error)}`
+        `Something went wrong during the logout: \n${handleError(error)}`
       );
     }
   };

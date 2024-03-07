@@ -12,14 +12,14 @@ import PropTypes from "prop-types";
  * @param props
  */
 export const ProfileGuard = () => {
-    if (localStorage.getItem("token")) {
+  if (localStorage.getItem("token")) {
 
-        return <Outlet />;
-    }
+    return <Outlet />;
+  }
 
-    return <Navigate to="/login" replace />;
+  return <Navigate to="/login" replace />;
 };
 
 ProfileGuard.propTypes = {
-    children: PropTypes.node
+  children: PropTypes.node
 };
