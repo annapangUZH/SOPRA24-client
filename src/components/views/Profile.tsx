@@ -8,6 +8,25 @@ import PropTypes from "prop-types";
 import "styles/views/Profile.scss";
 import { User } from "types";
 
+const FormField = (props) => {
+  return (
+    <div className="profile field">
+      <label className="profile label">{props.label}</label>
+      <input
+        className="profile input"
+        placeholder="enter here.."
+        value={props.value}
+        onChange={(e) => props.onChange(e.target.value)}
+      />
+    </div>
+  );
+};
+
+FormField.propTypes = {
+  label: PropTypes.string,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+};
 
 const Profile = () => {
   // use react-router-dom's hook to access navigation, more info: https://reactrouter.com/en/main/hooks/use-navigate
@@ -15,6 +34,9 @@ const Profile = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const id = queryParameters.get("id");
   const [user, setUser] = useState<User>(null);
+  const shouldShowButton = true;
+  const [username, setUsername] = useState<string>(null);
+  const [password, setPassword] = useState<string>(null);
 
   const logout = (): void => {
     localStorage.removeItem("token");
@@ -82,6 +104,10 @@ const Profile = () => {
       <p className="profile paragraph">
       </p>
       {content}
+      <Button
+        onClick={() => navigate("/editprofile")}>
+          edit
+      </Button>
     </BaseContainer>
   );
 };
