@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { api, handleError } from "helpers/api";
 import { Spinner } from "components/ui/Spinner";
 import { Button } from "components/ui/Button";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import BaseContainer from "components/ui/BaseContainer";
 import PropTypes from "prop-types";
 import "styles/views/Game.scss";
@@ -10,8 +10,7 @@ import { User } from "types";
 
 const Player = ({ user }: { user: User }) => (
   <div className="player container">
-    <div className="player username">{user.username}</div>
-    <div className="player name">{user.name}</div>
+    <div className="player username"><Link to={`/profile?id=${user.id}`}>{user.username}</Link></div>
     <div className="player id">id: {user.id}</div>
   </div>
 );
@@ -31,9 +30,19 @@ const Game = () => {
   // more information can be found under https://react.dev/learn/state-a-components-memory and https://react.dev/reference/react/useState 
   const [users, setUsers] = useState<User[]>(null);
 
-  const logout = (): void => {
-    localStorage.removeItem("token");
-    navigate("/login");
+  const doLogout = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const requestBody = JSON.stringify({ token });
+      await api.post("/logout", requestBody);
+
+      localStorage.removeItem("token");
+      navigate("/login");
+    } catch (error) {
+      alert(
+          `Something went wrong during the logout: \n${handleError(error)}`
+      );
+    }
   };
 
   // the effect hook can be used to react to change in your component.
@@ -91,7 +100,7 @@ const Game = () => {
             </li>
           ))}
         </ul>
-        <Button width="100%" onClick={() => logout()}>
+        <Button width="100%" onClick={() => doLogout()}>
           Logout
         </Button>
       </div>
