@@ -37,6 +37,7 @@ const Game = () => {
       await api.post("/logout", requestBody);
 
       localStorage.removeItem("token");
+      localStorage.removeItem("id");
       navigate("/login");
     } catch (error) {
       alert(

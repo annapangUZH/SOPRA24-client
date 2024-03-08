@@ -43,6 +43,7 @@ const Profile = () => {
     navigate("/login");
   };
 
+
   // the effect hook can be used to react to change in your component.
   // in this case, the effect hook is only run once, the first time the component is mounted
   // this can be achieved by leaving the second argument an empty array.
@@ -94,20 +95,27 @@ const Profile = () => {
         <li>username: {user.username}</li>
         <li>onlineStatus: {user.status}</li>
         <li>creationDate: {user.creationDate}</li>
-        <li>birthday: -</li>
+        <li>birthday: {user.birthday}</li>
       </ul>
     );
   }
+
+  let editButton = null
+    if (id === localStorage.getItem("id")){
+        editButton = (
+            <Button
+                onClick={() => navigate("/editprofile")}>
+                edit
+            </Button>
+        )
+    }
 
   return (
     <BaseContainer className="profile container">
       <p className="profile paragraph">
       </p>
       {content}
-      <Button
-        onClick={() => navigate("/editprofile")}>
-          edit
-      </Button>
+        {editButton}
     </BaseContainer>
   );
 };

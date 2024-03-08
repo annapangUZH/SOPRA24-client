@@ -3,4 +3,5 @@ export type User = {
   id: number;
   status: string;
   creationDate: string;
+  birthday: string;
 };
