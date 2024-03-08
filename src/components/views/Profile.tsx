@@ -101,21 +101,21 @@ const Profile = () => {
   }
 
   let editButton = null
-    if (id === localStorage.getItem("id")){
-        editButton = (
-            <Button
-                onClick={() => navigate("/editprofile")}>
-                edit
-            </Button>
-        )
-    }
+  if (id === localStorage.getItem("id")){
+    editButton = (
+      <Button
+        onClick={() => navigate("/editprofile")}>
+        edit
+      </Button>
+    )
+  }
 
   return (
     <BaseContainer className="profile container">
       <p className="profile paragraph">
       </p>
       {content}
-        {editButton}
+      {editButton}
     </BaseContainer>
   );
 };
